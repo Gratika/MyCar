@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="linerLoyaut_padding">5dp</dimen>
+    <dimen name="spiner_label_end_margint">5dp</dimen>
+    <dimen name="spiner_label_padding">5dp</dimen>
+    <dimen name="spiner_padding">5dp</dimen>
+</resources>

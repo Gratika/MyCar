@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyCar</string>
+    <string name="spiner_label">Car model</string>
+</resources>
