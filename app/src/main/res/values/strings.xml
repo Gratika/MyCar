@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MyCar</string>
     <string name="spiner_label">Car model</string>
+    <string name="previous_button_description">arrow previous</string>
+    <string name="next_button_description">arrow next</string>
 </resources>

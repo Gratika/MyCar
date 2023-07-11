@@ -32,22 +32,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         carList = findViewById(R.id.car_model);
         imageCar = findViewById(R.id.image_car);
+        //imageCar.setOnTouchListener(new SwipeTouchListener(this,modelImageCursor,imageCar,screenWidth(),screenHeight()));
 
         databaseHelper = new DatabaseHelper(getApplicationContext());
         // создаем базу данных
         databaseHelper.create_db();
-        String imageUrl ="https://images.toyota-europe.com/ua/product-token/0d4bb2e9-27b8-4894-b449-cd5886eaf6a9/vehicle/cd0186d6-80bd-47f3-a776-49a0426b8dec/width/847/height/334/scale-mode/1/padding/10/background-colour/FFFFFF/image-quality/75/day-exterior-03_2VS_FD80.jpg";
-        loadImage(imageUrl);
+
     }
     @Override
     public void onResume() {
         super.onResume();
         // открываем подключение
-        //db = databaseHelper.open();
+        db = databaseHelper.open();
         //заповнюємо випадаючий список
-        //getSpinnerData();
+        getSpinnerData();
         //завантажуємо перше зображення
-        //getImageData(carList.getSelectedItemId());
+        getImageData(carList.getSelectedItemId());
+        findViewById(R.id.btn_next).setOnClickListener(new onClickArrowButton(modelImageCursor,
+                screenWidth(), screenHeight(),imageCar));
+        findViewById(R.id.btn_previous).setOnClickListener(new onClickArrowButton(modelImageCursor,
+                screenWidth(), screenHeight(),imageCar));
 
     }
     @Override
@@ -72,9 +76,8 @@ public class MainActivity extends AppCompatActivity {
         modelImageCursor = db.rawQuery("select * from "+DatabaseHelper.IMAGE_TABLE+" where "
                              +DatabaseHelper.IMAGE_CAR_ID+"=?",new String[]{String.valueOf(carId)});
         if (modelImageCursor.moveToFirst()){
-            //String imageUrl = modelImageCursor.getString(2);
-            String imageUrl ="https://images.toyota-europe.com/ua/product-token/0d4bb2e9-27b8-4894-b449-cd5886eaf6a9/vehicle/cd0186d6-80bd-47f3-a776-49a0426b8dec/width/847/height/334/scale-mode/1/padding/10/background-colour/FFFFFF/image-quality/75/day-exterior-03_2VS_FD80.jpg";
-            runOnUiThread(new Runnable() {
+            String imageUrl = modelImageCursor.getString(2);
+             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     loadImage(imageUrl);
